@@ -1,3 +1,27 @@
+# ConvoKit data cache
+.convokit/
+
+# Python virtual environment
+.venv/
+
+# Python bytecode/cache
+__pycache__/
+*.pyc
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Secrets / environment variables
+.env
+
+# OS cruft
+.DS_Store
+
+# Model checkpoints (README explicitly says don't commit these)
+*.pt
+*.pth
+*.ckpt
+*.h5
 
 # Full local datasets and generated handoff bundles
 /data/local/
