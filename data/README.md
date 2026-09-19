@@ -35,12 +35,16 @@ The file is a source-normalized reference fixture, not the toolkit's final canon
 
 ## Tier 2 — complete source corpora
 
+Use the team's shared Python 3.12 setup. From the repository root, install the
+locked dependencies once with `uv sync --locked`, then run the download scripts
+below with `uv run`. Dependencies are managed in `pyproject.toml` and `uv.lock`.
+
 ### Coarse Discourse Sequence Corpus
 
 Use this corpus for the initial threaded-discussion path and discourse-act classification. It contains 9,483 Reddit conversations and 115,827 utterances with reply relationships and discourse labels.
 
 ```text
-uv run --with convokit python -c "from convokit import download; print(download('reddit-coarse-discourse-corpus'))"
+uv run python data/Download_Discourse_Corpus.py
 ```
 
 Source and documentation: <https://convokit.cornell.edu/documentation/coarseDiscourse.html>
@@ -50,7 +54,7 @@ Source and documentation: <https://convokit.cornell.edu/documentation/coarseDisc
 Use this corpus for conversation-quality and derailment modeling. The prepared loader names it `conversations-gone-awry-cmv-corpus`.
 
 ```text
-uv run --with convokit python -c "from convokit import download; print(download('conversations-gone-awry-cmv-corpus'))"
+uv run python data/Download_Awry_Corpus.py
 ```
 
 Source documentation: <https://convokit.cornell.edu/documentation/>

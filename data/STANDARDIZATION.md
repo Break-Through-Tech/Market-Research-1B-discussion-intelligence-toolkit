@@ -29,18 +29,29 @@ individual repaired conversations. No subreddit filtering or sampling was applie
 
 ## Reproduce
 
-From the repository root, use a Python 3.12 environment. The offline adapter only
-requires Pydantic; installing the full ConvoKit/NLP stack is unnecessary if you
-already have the downloaded corpus folders.
+Use the team's shared setup from PR #4. From the repository root, `uv` selects
+Python 3.12 using `.python-version` and installs the versions in `uv.lock`.
+`uv sync --locked` creates or synchronizes `.venv`; `uv run` uses that environment.
+Dependencies are managed in `pyproject.toml` and `uv.lock`.
 
 ```bash
-python3.12 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements-standardization.txt
-python -m unittest discover -s tests -v
-python artifacts/standardize_convokit.py --source-root "$HOME/.convokit/saved-corpora"
-python artifacts/verify_standardized.py --source-root "$HOME/.convokit/saved-corpora"
+uv sync --locked
+uv run python -m unittest discover -s tests -v
+uv run python artifacts/standardize_convokit.py
+uv run python artifacts/verify_standardized.py
 ```
+
+The scripts default to `~/.convokit/saved-corpora` on your machine. If the raw
+corpora are not downloaded yet, use the team's scripts:
+
+```bash
+uv run python data/Download_Discourse_Corpus.py
+uv run python data/Download_Awry_Corpus.py
+```
+
+Then run the standardization and verification commands above. To add or remove
+dependencies, use `uv add <package>` or `uv remove <package>` and commit both
+`pyproject.toml` and `uv.lock`.
 
 You can point `--source-root` at the parent folder of copies downloaded from Drive.
 Keep each entire source folder: `utterances.jsonl` alone does not contain all labels
@@ -107,7 +118,7 @@ The independent verification pass retains a compact source-field lookup in memor
 
 ## How teammates load the files
 
-From the repository root, in Python:
+From the repository root, start Python with `uv run python`, then:
 
 ```python
 import sys
@@ -171,7 +182,7 @@ They are examples, not representative samples for evaluation.
 ## GitHub versus Drive
 
 **Commit to GitHub:** the adapter, independent verifier, schema 1.1 adjustment,
-minimal requirements file, tests, `.gitignore`, this guide, `data/README.md`,
+tests, `.gitignore`, this guide, `data/README.md`,
 `data/standardization-summary.json`, and the tiny `data/standardized-samples/` files.
 
 **Upload to Drive:** the entire `data/local/standardized-v1/` folder, ideally under
