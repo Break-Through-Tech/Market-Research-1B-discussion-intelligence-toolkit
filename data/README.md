@@ -67,3 +67,13 @@ They are not approved as input to the current `RedditDumpConnector`. On 2026-08-
 ## Repository and source constraints
 
 Do not commit large corpora, private data, API keys, model checkpoints, or generated local parquet files. Record the source URL, retrieval date, selected communities, retained-record counts, split strategy, and relevant source terms for every corpus used beyond this reference sample. The upstream source's terms govern corpus access and redistribution.
+
+## Standardized ConvoKit outputs (Task #2)
+
+Both complete corpora have been standardized without dropping source records.
+See [STANDARDIZATION.md](STANDARDIZATION.md) for exact counts, cleaning rules,
+schema 1.1 changes, validation, reproduction commands, and the Drive handoff.
+Machine-readable counts are in [standardization-summary.json](standardization-summary.json).
+Small canonical examples are in `standardized-samples/`; full files are generated
+in Git-ignored `data/local/standardized-v1/` and belong on the shared Drive.
+These canonical examples differ from the original Tier 1 reference fixture above.

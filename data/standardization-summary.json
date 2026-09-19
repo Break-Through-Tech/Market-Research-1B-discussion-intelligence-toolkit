@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.1",
+  "pipeline_version": "1.0",
+  "selection": "Complete source corpora; no filtering or sampling",
+  "automated_tests_passed": 13,
+  "datasets": [
+    {
+      "corpus": "reddit-coarse-discourse-corpus",
+      "counts": {
+        "rejected_conversations": 0,
+        "rejected_utterances": 0,
+        "orphaned_replies": 207,
+        "source_depth_differences": 242,
+        "input_utterances": 115827,
+        "input_conversations": 9483,
+        "null_text": 1318,
+        "empty_clean_text": 2575,
+        "deleted_text": 1016,
+        "missing_timestamp": 115827,
+        "omitted_parsed_annotations": 0,
+        "synthetic_utterances": 188,
+        "source_utterances": 115827,
+        "output_utterances": 116015,
+        "conversations_with_repairs": 126,
+        "output_conversations": 9483,
+        "unique_output_speaker_ids": 63699,
+        "unique_source_speaker_ids": 63573
+      },
+      "source_splits": {},
+      "output": {
+        "file": "reddit-coarse-discourse-corpus.jsonl",
+        "sha256": "2f2e8e9c74c560ace5b463501229b2b1539393fc7fecbc4a7ddafab7d64c73dd",
+        "bytes": 179571012
+      }
+    },
+    {
+      "corpus": "conversations-gone-awry-cmv-corpus",
+      "counts": {
+        "rejected_conversations": 0,
+        "rejected_utterances": 0,
+        "orphaned_replies": 0,
+        "source_depth_differences": 0,
+        "input_utterances": 42964,
+        "input_conversations": 6842,
+        "null_text": 0,
+        "empty_clean_text": 0,
+        "deleted_text": 1192,
+        "missing_timestamp": 0,
+        "omitted_parsed_annotations": 42964,
+        "synthetic_utterances": 0,
+        "source_utterances": 42964,
+        "output_utterances": 42964,
+        "conversations_with_repairs": 0,
+        "output_conversations": 6842,
+        "unique_output_speaker_ids": 9548,
+        "unique_source_speaker_ids": 9548
+      },
+      "source_splits": {
+        "train": 4106,
+        "val": 1368,
+        "test": 1368
+      },
+      "output": {
+        "file": "conversations-gone-awry-cmv-corpus.jsonl",
+        "sha256": "ebd8bfd704f307cf83dcab8b5db7f2af72e758734899f6af47590258ef240c0c",
+        "bytes": 98404568
+      }
+    }
+  ],
+  "source_preservation_audit": [
+    {
+      "corpus": "reddit-coarse-discourse-corpus",
+      "verified_conversations": 9483,
+      "verified_source_utterances": 115827,
+      "synthetic_placeholders": 188,
+      "source_and_output_checksums_match": true,
+      "source_text_labels_timestamps_and_existing_edges_preserved": true
+    },
+    {
+      "corpus": "conversations-gone-awry-cmv-corpus",
+      "verified_conversations": 6842,
+      "verified_source_utterances": 42964,
+      "synthetic_placeholders": 0,
+      "source_and_output_checksums_match": true,
+      "source_text_labels_timestamps_and_existing_edges_preserved": true
+    }
+  ]
+}

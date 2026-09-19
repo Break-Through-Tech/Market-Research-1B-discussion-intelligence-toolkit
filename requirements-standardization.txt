@@ -1,0 +1,2 @@
+# Minimal dependencies for the offline ConvoKit JSONL adapter and its tests.
+pydantic>=2.0,<3
