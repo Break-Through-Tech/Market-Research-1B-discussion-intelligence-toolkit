@@ -35,12 +35,16 @@ The file is a source-normalized reference fixture, not the toolkit's final canon
 
 ## Tier 2 — complete source corpora
 
+Use the team's shared Python 3.12 setup. From the repository root, install the
+locked dependencies once with `uv sync --locked`, then run the download scripts
+below with `uv run`. Dependencies are managed in `pyproject.toml` and `uv.lock`.
+
 ### Coarse Discourse Sequence Corpus
 
 Use this corpus for the initial threaded-discussion path and discourse-act classification. It contains 9,483 Reddit conversations and 115,827 utterances with reply relationships and discourse labels.
 
 ```text
-uv run --with convokit python -c "from convokit import download; print(download('reddit-coarse-discourse-corpus'))"
+uv run python data/Download_Discourse_Corpus.py
 ```
 
 Source and documentation: <https://convokit.cornell.edu/documentation/coarseDiscourse.html>
@@ -50,7 +54,7 @@ Source and documentation: <https://convokit.cornell.edu/documentation/coarseDisc
 Use this corpus for conversation-quality and derailment modeling. The prepared loader names it `conversations-gone-awry-cmv-corpus`.
 
 ```text
-uv run --with convokit python -c "from convokit import download; print(download('conversations-gone-awry-cmv-corpus'))"
+uv run python data/Download_Awry_Corpus.py
 ```
 
 Source documentation: <https://convokit.cornell.edu/documentation/>
@@ -67,3 +71,13 @@ They are not approved as input to the current `RedditDumpConnector`. On 2026-08-
 ## Repository and source constraints
 
 Do not commit large corpora, private data, API keys, model checkpoints, or generated local parquet files. Record the source URL, retrieval date, selected communities, retained-record counts, split strategy, and relevant source terms for every corpus used beyond this reference sample. The upstream source's terms govern corpus access and redistribution.
+
+## Standardized ConvoKit outputs (Task #2)
+
+Both complete corpora have been standardized without dropping source records.
+See [STANDARDIZATION.md](STANDARDIZATION.md) for exact counts, cleaning rules,
+schema 1.1 changes, validation, reproduction commands, and the Drive handoff.
+Machine-readable counts are in [standardization-summary.json](standardization-summary.json).
+Small canonical examples are in `standardized-samples/`; full files are generated
+in Git-ignored `data/local/standardized-v1/` and belong on the shared Drive.
+These canonical examples differ from the original Tier 1 reference fixture above.

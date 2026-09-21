@@ -23,3 +23,5 @@ __pycache__/
 *.ckpt
 *.h5
 
+# Full local datasets and generated handoff bundles
+/data/local/

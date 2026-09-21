@@ -33,7 +33,7 @@ from typing import Any, Iterator
 
 from pydantic import BaseModel, ConfigDict, Field
 
-SCHEMA_VERSION = "1.0"
+SCHEMA_VERSION = "1.1"
 
 
 class Speaker(BaseModel):
@@ -83,7 +83,7 @@ class Utterance(BaseModel):
     )
 
     # --- Position in thread ---
-    created_at: datetime = Field(description="UTC timestamp of creation")
+    created_at: datetime | None = Field(description="UTC timestamp of creation; None when unknown")
     depth: int = Field(ge=0, description="Distance from root; 0 for the root utterance itself")
 
     # --- Source-platform signals ---
@@ -141,7 +141,7 @@ class Conversation(BaseModel):
     # --- Metadata ---
     title: str | None = Field(default=None, description="Thread title if the platform has one")
     url: str | None = Field(default=None, description="Canonical URL where the thread can be viewed")
-    created_at: datetime = Field(description="UTC timestamp of root creation")
+    created_at: datetime | None = Field(description="UTC timestamp of root creation; None when unknown")
 
     # --- Content ---
     utterances: list[Utterance] = Field(description="All utterances, ideally in DFS traversal order")
