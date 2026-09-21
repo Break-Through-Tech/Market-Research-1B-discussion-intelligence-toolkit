@@ -109,17 +109,23 @@ class PipelineTests(unittest.TestCase):
             base = Path(tmp)
             source = base / CORPUS
             source.mkdir()
-            rows = [row(), row('a', 'b', root='broken'), row('b', 'a', root='broken')]
-            (source/'utterances.jsonl').write_text('\n'.join(json.dumps(r) for r in rows)+'\n')
+            unicode_text = '你好 🌍 café'
+            rows = [row(text=unicode_text), row('a', 'b', root='broken'), row('b', 'a', root='broken')]
+            (source/'utterances.jsonl').write_text(
+                '\n'.join(json.dumps(r, ensure_ascii=False) for r in rows)+'\n',
+                encoding='utf-8',
+            )
             for name, contents in [('conversations.json', {'root':{}, 'broken':{}}), ('users.json', {'alice':{}}), ('index.json',{}), ('corpus.json',{})]:
-                (source/name).write_text(json.dumps(contents))
+                (source/name).write_text(json.dumps(contents), encoding='utf-8')
             with redirect_stdout(io.StringIO()):
                 report = run(source, base/'out', base/'samples')
             self.assertEqual(report['counts']['rejected_conversations'], 1)
             self.assertEqual(report['counts']['rejected_utterances'], 2)
             self.assertEqual(report['counts']['output_conversations'], 1)
-            self.assertEqual(len(list(iter_standardized(base/'out'/f'{CORPUS}.jsonl'))), 1)
-            self.assertEqual(len((base/'out'/f'{CORPUS}.rejected.jsonl').read_text().splitlines()), 1)
+            standardized = list(iter_standardized(base/'out'/f'{CORPUS}.jsonl'))
+            self.assertEqual(len(standardized), 1)
+            self.assertEqual(standardized[0].root().text, unicode_text)
+            self.assertEqual(len((base/'out'/f'{CORPUS}.rejected.jsonl').read_text(encoding='utf-8').splitlines()), 1)
             with self.assertRaisesRegex(ValueError, 'inside the source'):
                 run(source, source/'out', base/'samples')
 
@@ -134,13 +140,13 @@ class ReviewRegressionTests(unittest.TestCase):
             output = base/'out'
             output.mkdir()
             sentinel = output/f'{CORPUS}.jsonl'
-            sentinel.write_text('existing full dataset')
+            sentinel.write_text('existing full dataset', encoding='utf-8')
             alias = base/'alias'
             alias.symlink_to(output, target_is_directory=True)
             for sample in [output, output/'.', alias]:
                 with self.subTest(sample=sample), self.assertRaisesRegex(ValueError, 'must be different'):
                     run(base/CORPUS, output, sample)
-                self.assertEqual(sentinel.read_text(), 'existing full dataset')
+                self.assertEqual(sentinel.read_text(encoding='utf-8'), 'existing full dataset')
 
     def test_preflight_checks_sample_directory_against_every_source(self):
         import tempfile
@@ -166,7 +172,13 @@ for bad in [Counter(input_utterances=1), Counter(input_conversations=1)]:
 validate_retention(Counter(input_utterances=2, source_utterances=1, rejected_utterances=1,
                            input_conversations=2, output_conversations=1, rejected_conversations=1))
 """
-        result = subprocess.run([sys.executable, '-O', '-c', code], cwd=Path(__file__).resolve().parents[1]/'artifacts', capture_output=True, text=True)
+        result = subprocess.run(
+            [sys.executable, '-O', '-c', code],
+            cwd=Path(__file__).resolve().parents[1]/'artifacts',
+            capture_output=True,
+            text=True,
+            encoding='utf-8',
+        )
         self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
 
     def test_coarse_discourse_parsed_metadata_is_preserved(self):
@@ -178,12 +190,15 @@ validate_retention(Counter(input_utterances=2, source_utterances=1, rejected_utt
         import json
         source = base/CORPUS
         source.mkdir()
-        (source/'utterances.jsonl').write_text(json.dumps(row(meta={'ups':7,'custom':'keep'}))+'\n')
+        (source/'utterances.jsonl').write_text(
+            json.dumps(row(meta={'ups':7,'custom':'keep'}))+'\n',
+            encoding='utf-8',
+        )
         conversations = {'root':{}}
         if metadata_only:
             conversations['empty'] = {'title':'metadata-only conversation'}
         for filename, contents in [('conversations.json',conversations),('users.json',{'alice':{'profile':'preserve'}}),('index.json',{}),('corpus.json',{})]:
-            (source/filename).write_text(json.dumps(contents))
+            (source/filename).write_text(json.dumps(contents), encoding='utf-8')
         return source
 
     def test_metadata_only_conversation_is_counted_and_quarantined(self):
@@ -196,7 +211,7 @@ validate_retention(Counter(input_utterances=2, source_utterances=1, rejected_utt
                 result = run(self.fixture(base, True), base/'out', base/'samples')
             self.assertEqual(result['counts']['input_conversations'], 2)
             self.assertEqual(result['counts']['rejected_conversations'], 1)
-            rejected = json.loads((base/'out'/f'{CORPUS}.rejected.jsonl').read_text())
+            rejected = json.loads((base/'out'/f'{CORPUS}.rejected.jsonl').read_text(encoding='utf-8'))
             self.assertEqual(rejected['conversation_id'], 'empty')
             self.assertEqual(rejected['source_ids'], [])
 
@@ -212,7 +227,7 @@ validate_retention(Counter(input_utterances=2, source_utterances=1, rejected_utt
                 run(self.fixture(base), base/'out', base/'samples')
             out = base/'out'
             target = out/f'{CORPUS}.jsonl'
-            original = json.loads(target.read_text())
+            original = json.loads(target.read_text(encoding='utf-8'))
             import copy
             for change in ['message', 'speaker', 'score', 'depth']:
                 altered = copy.deepcopy(original)
@@ -220,11 +235,11 @@ validate_retention(Counter(input_utterances=2, source_utterances=1, rejected_utt
                 if change == 'speaker': altered['metadata']['source_speaker_metadata'] = {}
                 if change == 'score': altered['utterances'][0]['score'] = 999
                 if change == 'depth': altered['utterances'][0]['depth'] = 9
-                target.write_text(json.dumps(altered)+'\n')
+                target.write_text(json.dumps(altered)+'\n', encoding='utf-8')
                 mf = out/f'{CORPUS}.manifest.json'
-                manifest = json.loads(mf.read_text())
+                manifest = json.loads(mf.read_text(encoding='utf-8'))
                 manifest['output']['sha256'] = sha256(target)
-                mf.write_text(json.dumps(manifest))
+                mf.write_text(json.dumps(manifest), encoding='utf-8')
                 with self.subTest(change=change), patch('verify_standardized.CORPORA',(CORPUS,)):
                     with self.assertRaises(ValueError): verify(base, out)
 

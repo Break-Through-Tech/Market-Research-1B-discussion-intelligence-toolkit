@@ -174,12 +174,15 @@ def sha256(path: Path) -> str:
 
 
 def write_json(path, obj):
-    path.write_text(json.dumps(obj, indent=2, ensure_ascii=False) + '\n')
+    path.write_text(
+        json.dumps(obj, indent=2, ensure_ascii=False) + '\n',
+        encoding='utf-8',
+    )
 
 
 def iter_standardized(path: str | Path):
     """Stream validated Conversation objects without loading the full dataset."""
-    with Path(path).open() as f:
+    with Path(path).open(encoding='utf-8') as f:
         for number, line in enumerate(f, 1):
             try:
                 conv = Conversation.model_validate_json(line)
@@ -214,9 +217,9 @@ def run(source: Path, output: Path, sample_dir: Path):
     validate_paths([source], output, sample_dir)
     output.mkdir(parents=True, exist_ok=True)
     sample_dir.mkdir(parents=True, exist_ok=True)
-    conv_meta = json.loads((source / 'conversations.json').read_text())
+    conv_meta = json.loads((source / 'conversations.json').read_text(encoding='utf-8'))
     speaker_file = source / ('users.json' if (source / 'users.json').exists() else 'speakers.json')
-    source_speakers = json.loads(speaker_file.read_text())
+    source_speakers = json.loads(speaker_file.read_text(encoding='utf-8'))
     totals = Counter({'rejected_conversations': 0, 'rejected_utterances': 0,
                       'orphaned_replies': 0, 'source_depth_differences': 0})
     unique_speakers = set()
@@ -230,7 +233,7 @@ def run(source: Path, output: Path, sample_dir: Path):
     with tempfile.TemporaryDirectory(prefix='convokit-standardize-') as tmp:
         db = sqlite3.connect(str(Path(tmp) / 'rows.sqlite'))
         db.execute('CREATE TABLE rows (seq INTEGER PRIMARY KEY, cid TEXT, uid TEXT UNIQUE, payload TEXT)')
-        with (source / 'utterances.jsonl').open() as f:
+        with (source / 'utterances.jsonl').open(encoding='utf-8') as f:
             for seq, line in enumerate(f):
                 r = json.loads(line)
                 cid = r.get('conversation_id', r.get('root'))
@@ -244,7 +247,10 @@ def run(source: Path, output: Path, sample_dir: Path):
         # Metadata-only conversations are inputs too; quarantine rather than omit.
         cids = sorted(row_cids | set(conv_meta))
         totals['input_conversations'] = len(cids)
-        with outpath.open('w') as out, rejected.open('w') as errors:
+        with (
+            outpath.open('w', encoding='utf-8') as out,
+            rejected.open('w', encoding='utf-8') as errors,
+        ):
             for cid in cids:
                 rows = [json.loads(r[0]) for r in db.execute('SELECT payload FROM rows WHERE cid=? ORDER BY seq', (cid,))]
                 try:
@@ -285,7 +291,10 @@ def run(source: Path, output: Path, sample_dir: Path):
     totals['unique_output_speaker_ids'] = len(unique_speakers)
     totals['unique_source_speaker_ids'] = len(source_used_speakers)
     validate_retention(totals)
-    (sample_dir / f'{corpus}.jsonl').write_text('\n'.join(sample) + '\n')
+    (sample_dir / f'{corpus}.jsonl').write_text(
+        '\n'.join(sample) + '\n',
+        encoding='utf-8',
+    )
     source_files = ['utterances.jsonl', 'conversations.json', speaker_file.name, 'corpus.json', 'index.json']
     manifest = {
         'corpus': corpus, 'pipeline_version': VERSION, 'schema_version': SCHEMA_VERSION,
@@ -295,7 +304,7 @@ def run(source: Path, output: Path, sample_dir: Path):
         'source': {'download_name': corpus,
                    'archive_url': f'http://zissou.infosci.cornell.edu/convokit/datasets/{corpus}/{corpus}.zip',
                    'documentation': 'https://convokit.cornell.edu/documentation/',
-                   'download_record': json.loads((source/'local-download-record.json').read_text()) if (source/'local-download-record.json').exists() else None,
+                   'download_record': json.loads((source/'local-download-record.json').read_text(encoding='utf-8')) if (source/'local-download-record.json').exists() else None,
                    'files': {f: {'sha256': sha256(source/f), 'bytes': (source/f).stat().st_size} for f in source_files}},
         'selection': 'All source conversations, no sampling; invalid conversations quarantined',
         'split_policy': 'Preserve source split and pair_id metadata. No new train/test split.',

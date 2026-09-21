@@ -9,7 +9,7 @@ from schema import Conversation
 
 def read_checked(path):
     """Validate tree reachability independently of producer traversal helpers."""
-    with path.open() as f:
+    with path.open(encoding='utf-8') as f:
         for line in f:
             conv = Conversation.model_validate_json(line)
             nodes = {u.id: u for u in conv.utterances}
@@ -40,7 +40,7 @@ def verify(source_root: Path, output: Path):
     results = []
     for name in CORPORA:
         source = source_root/name
-        manifest = json.loads((output/f'{name}.manifest.json').read_text())
+        manifest = json.loads((output/f'{name}.manifest.json').read_text(encoding='utf-8'))
         for filename, info in manifest['source']['files'].items():
             if sha256(source/filename) != info['sha256']:
                 raise ValueError(f'source checksum changed: {name}/{filename}')
@@ -49,7 +49,7 @@ def verify(source_root: Path, output: Path):
             raise ValueError(f'output checksum changed: {name}')
         # Retain just the source fields needed for the audit, not bulky NLP parses.
         expected = {}
-        with (source/'utterances.jsonl').open() as f:
+        with (source/'utterances.jsonl').open(encoding='utf-8') as f:
             for line in f:
                 r = json.loads(line)
                 if r['id'] in expected:
@@ -59,9 +59,9 @@ def verify(source_root: Path, output: Path):
                 r['meta'] = meta
                 r['_parsed_omitted'] = omitted
                 expected[r['id']] = r
-        cm = json.loads((source/'conversations.json').read_text())
+        cm = json.loads((source/'conversations.json').read_text(encoding='utf-8'))
         sf = source / ('users.json' if (source/'users.json').exists() else 'speakers.json')
-        speakers = json.loads(sf.read_text())
+        speakers = json.loads(sf.read_text(encoding='utf-8'))
         seen_conversations = set()
         seen = set()
         count = synthetic = 0

@@ -200,10 +200,10 @@ It contains two full JSONL files, manifests with source/output SHA-256 values,
 validation reports, empty rejection ledgers, and a copy of this guide. Do not
 replace the raw datasets or upload `.venv/`. The full outputs are about 265 MiB.
 
-Keep the folder's filenames together so manifest references resolve. Add the
-actual Drive folder link to Task #2 when uploaded; no Drive link has been supplied
-or verified by this implementation. Upload the folder separately and add its link
-to Task #2; the code pull request does not upload the datasets or complete that handoff.
+Keep the folder's filenames together so manifest references resolve. The standardized
+dataset handoff is available in the team's [Google Drive folder](https://drive.google.com/drive/folders/1us35ruA7hmeLGGEwOcSVHIr9k7xHITxB?usp=drive_link).
+The processing and verification scripts do not independently confirm the contents or
+permissions of that external folder.
 
 Source documentation:
 - https://convokit.cornell.edu/documentation/coarseDiscourse.html
