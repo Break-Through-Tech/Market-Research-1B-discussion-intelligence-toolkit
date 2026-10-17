@@ -4,6 +4,20 @@ An open-source Python toolkit for turning long asynchronous discussions into str
 
 This repository is both the team’s working project space and the final public portfolio artifact. Students will build the package, notebooks, experiments, evaluation results, documentation, and final report here throughout Break Through Tech AI Studio Fall 2026. Keep this README current as the project evolves; by December, it should read as the project’s public technical report.
 
+## Results So Far
+
+Results through Notebook 06 (October 2026):
+
+| Component                     |                       Best result | Evaluation                                                                        |
+| ----------------------------- | --------------------------------: | --------------------------------------------------------------------------------- |
+| Discourse-act baseline        |                Macro F1 **0.373** | Class-balanced TF-IDF; development split; majority baseline 0.066                 |
+| Reply civility baseline       | Macro F1 **0.622**; AUC **0.664** | Official CGA-CMV test split                                                       |
+| Conversation-quality baseline | Macro F1 **0.611**; AUC **0.656** | Civility/derailment; official CGA-CMV test split                                  |
+| Embedding comparison          |                BGE-small selected | Best quality/cost tradeoff; MPNet had the highest sampled derailment AUC at 0.585 |
+| Preliminary clustering        |             Silhouette ≈ **0.02** | KMeans was insufficient; improved method needed                                   |
+
+The quality baseline currently measures civility. Relevance, reasoning, and constructiveness will be added before producing an aggregate quality score. Results use different datasets and evaluation protocols and are not a shared leaderboard.
+
 ## Start Here
 
 1. Read `Challenge-Project-Overview.md` for the full challenge brief, milestones, and advisor expectations.
@@ -50,42 +64,42 @@ Training happens once on labeled corpora. Inference should run on new threads wi
 
 ## Repository Map
 
-| Path | Purpose | Owner |
-|---|---|---|
-| `Challenge-Project-Overview.md` | Challenge brief, milestones, resources, advisor expectations | Challenge Advisor |
-| `Getting-Started-for-Fellows.md` | BTT orientation and initial repo guidance | Challenge Advisor / Fellows |
-| `README.md` | Living project home, progress log, and final portfolio artifact | Fellows |
-| `notebooks/` | EDA, modeling, evaluation, and demo notebooks | Fellows |
-| `data/` | Small metadata files, data dictionaries, or links to external datasets | Fellows |
-| `pyproject.toml` / `uv.lock` | Python package metadata, dependency groups, and locked environment once package scaffolding is added | Fellows |
-| `requirements.txt` | Legacy scaffold file from the template; migrate dependencies to `pyproject.toml` and `uv.lock` before adding project packages | Fellows |
-| `.gitignore` | Files that must stay out of version control | Fellows |
+| Path                             | Purpose                                                                                                                       | Owner                       |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| `Challenge-Project-Overview.md`  | Challenge brief, milestones, resources, advisor expectations                                                                  | Challenge Advisor           |
+| `Getting-Started-for-Fellows.md` | BTT orientation and initial repo guidance                                                                                     | Challenge Advisor / Fellows |
+| `README.md`                      | Living project home, progress log, and final portfolio artifact                                                               | Fellows                     |
+| `notebooks/`                     | EDA, modeling, evaluation, and demo notebooks                                                                                 | Fellows                     |
+| `artifacts/`                     | Reusable schema, feature, evaluation, quality, and embedding modules                                                          | Fellows                     |
+| `tests/`                         | Automated tests for reusable project modules                                                                                  | Fellows                     |
+| `data/`                          | Small metadata files, data dictionaries, or links to external datasets                                                        | Fellows                     |
+| `pyproject.toml` / `uv.lock`     | Python package metadata, dependency groups, and locked environment once package scaffolding is added                          | Fellows                     |
+| `requirements.txt`               | Legacy scaffold file from the template; migrate dependencies to `pyproject.toml` and `uv.lock` before adding project packages | Fellows                     |
+| `.gitignore`                     | Files that must stay out of version control                                                                                   | Fellows                     |
 
 As the toolkit grows, use package and test directories such as `src/` and `tests/` rather than keeping production code only in notebooks.
 
 ## Team Members
 
-| Name | GitHub Handle | Primary Contribution |
-|---|---|---|
-| TBD | TBD | TBD |
-| TBD | TBD | TBD |
-| TBD | TBD | TBD |
-| TBD | TBD | TBD |
+| Name             | GitHub Handle                                                                           | Primary Contribution |
+| ---------------- | --------------------------------------------------------------------------------------- | -------------------- |
+| Tiffany Calle    | [@TiffanyCalle](https://github.com/TiffanyCalle)                                        | TBD                  |
+| Ravi Chahal      | [@RavjeetChahal](https://github.com/RavjeetChahal)                                      | TBD                  |
+| Thomas Di Maggio | [@tdmagg](https://github.com/tdmagg)                                                    | TBD                  |
+| Norah Haque      | [@norahhaque](https://github.com/norahhaque)                                            | TBD                  |
+| Isaiah Mak       | [@ShinyRayquay](https://github.com/ShinyRayquay) / [@IsaMak](https://github.com/IsaMak) | TBD                  |
+| Jay Timbol       | [@jctimbol](https://github.com/jctimbol)                                                | TBD                  |
+| Daniel Voyevoda  | [@dvoyevoda](https://github.com/dvoyevoda)                                              | TBD                  |
 
 Update this table as responsibilities become clear. Contributions should name concrete ownership such as connector implementation, EDA, model training, evaluation harness, packaging, documentation, or final demo.
 
 ## Project Highlights
 
-Keep this section current as the project matures. By the final submission, it should summarize the strongest technical outcomes.
-
-- Built a Python toolkit for converting threaded discussions into evidence-linked insight reports.
-- Implemented a connector-based ingestion architecture for asynchronous discussion data.
-- Evaluated discourse-act classification using macro F1 on labeled conversation corpora.
-- Evaluated argument-quality or discussion-quality scoring using regression and rank-correlation metrics.
-- Used clustering and retrieval to ground LLM-generated summaries in source comments.
-- Produced a reproducible demo that runs on free-tier student-accessible compute.
-
-Replace or refine these bullets with measured results once the team has them.
+- Standardized two labeled corpora under one schema.
+- Established discourse and civility-based quality baselines.
+- Selected BGE-small as the default embedding model.
+- **November integration results: TBD.**
+- **December final evaluation and demo: TBD.**
 
 ## Setup and Installation
 
@@ -126,29 +140,15 @@ The core design goal is transferability: students should finish with a package t
 
 ## Data
 
-The project is designed around public threaded-discussion data and labeled conversation corpora.
+Full corpora and embedding caches stay out of Git; see [`data/README.md`](data/README.md) and [`data/STANDARDIZATION.md`](data/STANDARDIZATION.md).
 
-Primary data sources and roles:
+| Dataset                     |                                    Size | Use                      | Notes                                                                             |
+| --------------------------- | --------------------------------------: | ------------------------ | --------------------------------------------------------------------------------- |
+| Coarse Discourse            | 9,483 conversations; 115,827 utterances | Discourse classification | Median 9 utterances; no timestamps; synthetic repairs excluded from text training |
+| CGA-CMV                     |  6,842 conversations; 42,964 utterances | Civility and derailment  | Median 6 utterances; official 4,106/1,368/1,368 split; matched pairs preserved    |
+| Target-domain thread export |                                 **TBD** | End-to-end evaluation    | Must preserve `parent_id`                                                         |
 
-- Pushshift Reddit dumps: bulk threaded discussion data for EDA, connector development, and end-to-end analysis.
-- ConvoKit Coarse Discourse Corpus: labeled Reddit utterances for discourse-act classification.
-- ConvoKit CGA-CMV: ChangeMyView discussion data for quality or derailment-related modeling.
-- Optional stretch sources: Hacker News, GitHub Discussions, Discord exports, podcast transcripts, or other threaded discussion formats.
-
-Document the team’s selected data sources here:
-
-| Dataset | Source | Format | Size | Purpose | Access Notes |
-|---|---|---:|---:|---|---|
-| TBD | TBD | TBD | TBD | TBD | TBD |
-
-Data exploration should report:
-
-- selected subreddit or discussion-domain verticals
-- number of submissions, comments, threads, speakers, and utterances retained
-- thread length and depth distributions
-- deleted, removed, empty, or orphaned comment rates
-- language, markdown, and text-cleaning decisions
-- train/dev/test split strategy and leakage controls
+Analysis: [01 — EDA](notebooks/01_standardized_corpora_eda.ipynb), [02 — text features](notebooks/02_text_features.ipynb), and [03 — structural features](notebooks/03_structural_features.ipynb).
 
 ## Model Development
 
@@ -162,38 +162,40 @@ Recommended progression:
 4. Fine-tuned DistilBERT or another compact transformer for supervised tasks.
 5. Retrieval-grounded LLM synthesis after evidence extraction and retrieval are working.
 
-Document each model experiment:
+Experiments: [04 — discourse baseline](notebooks/04_comment_labeling_baseline.ipynb), [05 — quality baseline](notebooks/05_conversation_quality_baseline.ipynb), and [06 — embedding comparison](notebooks/06_embedding_comparison.ipynb).
 
-| Date | Task | Model | Data Split | Metric | Result | Notes |
-|---|---|---|---|---|---:|---|
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD |
+| Future experiment              | Result  |
+| ------------------------------ | ------- |
+| Context-aware discourse model  | **TBD** |
+| Aggregate quality model        | **TBD** |
+| Topic clustering and retrieval | **TBD** |
+| Integrated insight report      | **TBD** |
 
 ## Evaluation Plan
 
 Use task-specific metrics. Do not rely on generic accuracy alone.
 
-| Component | Primary Metrics | What the Metric Checks |
-|---|---|---|
-| Discourse-act classifier | Macro F1, per-class F1, confusion matrix | Whether minority discourse labels are handled well |
-| Quality scorer | MAE, Spearman correlation | Whether predicted scores match level and ranking |
-| Topic clustering | Silhouette score, sampled cluster coherence review | Whether clusters are separated and interpretable |
-| Retrieval | Recall@k on hand-written thread questions | Whether cited evidence can be retrieved |
-| LLM synthesis | Claim coverage, evidence-link accuracy, hallucination rate | Whether reports are useful and grounded |
+| Component                       | Primary metrics                                                                 | Status and purpose                                                                        |
+| ------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Discourse-act classifier        | Macro F1, per-class F1, confusion matrix                                        | Development baseline measured; final held-out test result **TBD**                         |
+| Civility-based quality baseline | Accuracy, macro F1, ROC AUC, matched-pair accuracy                              | Held-out baseline measured in Notebook 05                                                 |
+| Future aggregate quality scorer | Component metrics; MAE and Spearman correlation against human aggregate ratings | Requires relevance, reasoning, constructiveness, and human-rated validation data; **TBD** |
+| Topic clustering                | Silhouette score and sampled cluster-coherence review                           | Preliminary KMeans silhouette ≈0.02 in Notebook 06; improved method **TBD**               |
+| Retrieval                       | Recall@k on hand-written thread questions                                       | **TBD**                                                                                   |
+| LLM synthesis                   | Claim coverage, evidence-link accuracy, hallucination rate                      | **TBD**                                                                                   |
 
 For the final system, build a small held-out set of manually reviewed threads. Score final reports against human-written insight digests for claim coverage, evidence accuracy, and hallucination rate.
 
 ## Results and Key Findings
 
-Update this section throughout the project. Include both successful and failed experiments when they changed the team’s direction.
+See [Results So Far](#results-so-far) for current metrics. Source notebooks: [01](notebooks/01_standardized_corpora_eda.ipynb), [02](notebooks/02_text_features.ipynb), [03](notebooks/03_structural_features.ipynb), [04](notebooks/04_comment_labeling_baseline.ipynb), [05](notebooks/05_conversation_quality_baseline.ipynb), and [06](notebooks/06_embedding_comparison.ipynb).
 
-Recommended result artifacts:
+Future artifacts to add:
 
-- EDA charts for thread size, depth, score, and label distributions
-- baseline metrics before transformer fine-tuning
-- final model comparison table
-- error analysis examples
-- retrieval examples showing query, retrieved comments, and missing evidence
-- final insight-report examples with cited utterance IDs
+- final model comparison — **TBD**
+- cluster and retrieval examples — **TBD**
+- cited insight-report example — **TBD**
+- final human-review metrics — **TBD**
 
 ## Final Demo Requirements
 
@@ -210,23 +212,22 @@ The demo should run on student-accessible compute such as Google Colab.
 
 ## Milestones
 
-| Month | Focus | Expected Outcomes |
-|---|---|---|
-| September | Data understanding and baselines | EDA, cleaned schema, baseline models, initial evaluation harness |
-| October | Modeling | Discourse classifier, quality scorer, topic clustering, model comparisons |
-| November | Integration | End-to-end `analyze(thread)` pipeline, retrieval, LLM synthesis, package structure |
-| December | Polish and presentation | Final report, reproducible demo, recorded walkthrough, documented next steps |
+| Month     | Focus                            | Expected Outcomes                                                                  |
+| --------- | -------------------------------- | ---------------------------------------------------------------------------------- |
+| September | Data understanding and baselines | EDA, cleaned schema, baseline models, initial evaluation harness                   |
+| October   | Modeling                         | Discourse classifier, quality scorer, topic clustering, model comparisons          |
+| November  | Integration                      | End-to-end `analyze(thread)` pipeline, retrieval, LLM synthesis, package structure |
+| December  | Polish and presentation          | Final report, reproducible demo, recorded walkthrough, documented next steps       |
+
+Status: September work and Notebooks 04–06 are complete; November and December results remain **TBD**.
 
 ## Next Steps
 
-Track project-specific next steps here. Early candidates:
-
-- Select target subreddit or discussion-domain verticals.
-- Define the canonical conversation schema.
-- Build or adopt a starter connector.
-- Run first EDA on reconstructed threads.
-- Establish baseline metrics before fine-tuning.
-- Decide how final reports will cite supporting utterances.
+- Run final held-out discourse evaluation with context-aware features.
+- Build relevance, reasoning, and constructiveness components for aggregate quality.
+- Cache full-corpus BGE-small embeddings and improve clustering.
+- Measure retrieval Recall@k on a small benchmark.
+- Integrate and evaluate `analyze(thread)` on a parent-preserving target corpus.
 
 ## License
 
