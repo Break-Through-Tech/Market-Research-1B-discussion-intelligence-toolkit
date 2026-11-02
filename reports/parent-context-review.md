@@ -1,8 +1,8 @@
 # October Task 3.5 review and paired analysis
 
-PR #21 already implements the core parent-comment context experiment. The remaining work is to compare per-class results side by side and inspect the same examples under both models. This follow-up adds an analysis command and regression tests for those gaps, without another training experiment.
+PR #21 already implements the core parent-comment context experiment. This follow-up completes the review, comparison command, and regression tests. Comparing per-class results side by side and inspecting the same examples under both models is deferred to issue #22 until the original evaluation exports are available.
 
-**Status: analysis tooling is tested; the final paired results are pending the original evaluation exports.** The exports and trained checkpoints are absent from this checkout and the accessible team Drive. Aggregate notebook scores cannot reconstruct per-example predictions. Task [#22](https://github.com/Break-Through-Tech/Market-Research-1B-discussion-intelligence-toolkit/issues/22) remains open until those results can be calculated and reviewed.
+**Status: review and comparison tooling complete; empirical paired analysis deferred to [issue #22](https://github.com/Break-Through-Tech/Market-Research-1B-discussion-intelligence-toolkit/issues/22).** The exports and trained checkpoints are absent from this checkout and the accessible team Drive. Aggregate notebook scores cannot reconstruct per-example predictions. The review and tested tooling are ready to merge; issue #22 remains open for the missing results and example review.
 
 ## Review of PR 21
 
@@ -45,7 +45,7 @@ The analysis should preserve the original example population, including empty-pa
 
 The experiments use one training seed. No claim of statistical significance or cross-community generalization follows from this comparison. "Helps" and "hurts" describe correctness against corpus labels, which can be ambiguous; illustrative snippets are not causal explanations of the model's behavior.
 
-## Finish the paired analysis
+## Deferred paired analysis
 
 The missing artifacts are the two evaluation directories from the original run:
 
@@ -63,7 +63,7 @@ data/local/discourse_transformer/experiment_01/
     transformer/predictions.jsonl
 ```
 
-Both directories must be recovered from the original run. If only saved checkpoints survive, PR #21's evaluation script can regenerate the exports by inference. If neither exports nor checkpoints survive, reproducing the original paired analysis requires another training run and should be tracked separately. The committed notebook outputs contain neither complete predictions nor model weights.
+To complete issue #22, recover both directories from the original run. If only saved checkpoints survive, PR #21's evaluation script can regenerate the exports by inference. If neither exports nor checkpoints survive, reproducing the original paired analysis requires another training run and should be tracked separately. The committed notebook outputs contain neither complete predictions nor model weights. This artifact recovery and empirical analysis are deferred follow-up work and do not block merging the review and comparison tooling.
 
 Once the directories are available, run from the repository root:
 
@@ -78,7 +78,7 @@ The command checks equal split metadata and manifests, conversation isolation, c
 
 It writes `summary.json` with both models' metrics and input SHA-256 fingerprints, `per_class_f1.csv` with support and F1 deltas, and `report.md` with aggregate scores, correctness transitions, parent-availability strata, and up to three examples per effect. Example selection is reproducible and varies gold classes using sampling seed 42; the sampling seed does not alter the evaluation split. Snippets are capped at 400 characters and link to Reddit when canonical IDs permit. The corpus exports are the evidence if live Reddit pages have changed.
 
-Full predictions stay under ignored `data/local/`. Review the generated report, add the aggregate results and selected examples to this follow-up, and complete #22 only after the missing comparisons have been verified. No paired metrics or example-level findings are claimed while the exports are unavailable.
+Full predictions stay under ignored `data/local/`. In a follow-up PR for issue #22, review the generated report and add the aggregate results and selected examples. Complete #22 only after the missing comparisons have been verified. No paired metrics or example-level findings are claimed while the exports are unavailable.
 
 ## Validation
 

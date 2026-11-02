@@ -164,7 +164,7 @@ Recommended progression:
 
 Experiments: [04 — discourse baseline](notebooks/04_comment_labeling_baseline.ipynb), [05 — quality baseline](notebooks/05_conversation_quality_baseline.ipynb), and [06 — embedding comparison](notebooks/06_embedding_comparison.ipynb).
 
-October Task 3.5: [review of PR #21 and paired parent-context analysis](reports/parent-context-review.md). The comparison tool is tested; final per-class deltas and paired examples await the original prediction exports.
+October Task 3.5: [review of PR #21 and paired parent-context analysis](reports/parent-context-review.md). Review and comparison tooling are complete; empirical per-class deltas and paired examples are deferred to [issue #22](https://github.com/Break-Through-Tech/Market-Research-1B-discussion-intelligence-toolkit/issues/22) pending the original prediction exports.
 
 | Future experiment              | Result  |
 | ------------------------------ | ------- |
