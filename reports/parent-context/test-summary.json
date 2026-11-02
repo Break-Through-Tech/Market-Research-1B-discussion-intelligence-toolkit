@@ -1,0 +1,309 @@
+{
+  "split": "test",
+  "split_seed": 42,
+  "sample_seed": 42,
+  "n_examples": 10343,
+  "input_sha256": {
+    "comment_only": {
+      "evaluation_config.json": "e305c9436becac6ddb02c16cfebdd21c84d2b2195f5b963513e644701e9297b4",
+      "split_manifest.json": "1d40587163ae0118cca4a75ff50c6c0dc926fa9ad380545c421e76c1f1f0910a",
+      "transformer/predictions.jsonl": "91ef75cbf7194a6eda3a8d9011ad20914fad8c44780ecee9afd08926c2eb35d1",
+      "transformer/metrics.json": "76f370f2bc8499b398f410535d0952976b53a6fad8a272ff28724ad5e6c13023"
+    },
+    "parent_context": {
+      "evaluation_config.json": "c8adab99f56d5d39daa0023d6ea68668346f983482d59d5498488158978c49e1",
+      "split_manifest.json": "1d40587163ae0118cca4a75ff50c6c0dc926fa9ad380545c421e76c1f1f0910a",
+      "transformer/predictions.jsonl": "6d92ae6e9c16d6c5d238d01c113e33307178e9a6d0f3fb4f23997b8ffa8f2eaa",
+      "transformer/metrics.json": "46f883949c3bcc9d9ee7d975abe1e88eea3b85ce9c58852cf3b070c3d3e5ed86"
+    }
+  },
+  "metrics": {
+    "comment_only": {
+      "n_examples": 10343,
+      "accuracy": 0.6427535531277192,
+      "macro_f1": 0.49959283696968626,
+      "weighted_f1": 0.6289710199448357,
+      "per_class_f1": {
+        "agreement": 0.5573033707865168,
+        "announcement": 0.43884892086330934,
+        "answer": 0.7230671736375158,
+        "appreciation": 0.7688913403199118,
+        "disagreement": 0.3229166666666667,
+        "elaboration": 0.3900584795321637,
+        "humor": 0.17902813299232737,
+        "negativereaction": 0.30158730158730157,
+        "question": 0.8146341463414634
+      },
+      "confusion": [
+        [
+          248,
+          1,
+          107,
+          33,
+          7,
+          88,
+          5,
+          14,
+          13
+        ],
+        [
+          0,
+          61,
+          34,
+          4,
+          1,
+          17,
+          0,
+          1,
+          16
+        ],
+        [
+          60,
+          27,
+          3423,
+          51,
+          118,
+          389,
+          47,
+          50,
+          139
+        ],
+        [
+          10,
+          5,
+          92,
+          697,
+          1,
+          71,
+          22,
+          12,
+          26
+        ],
+        [
+          6,
+          2,
+          164,
+          4,
+          124,
+          74,
+          0,
+          15,
+          20
+        ],
+        [
+          45,
+          21,
+          1025,
+          51,
+          78,
+          667,
+          21,
+          28,
+          68
+        ],
+        [
+          3,
+          0,
+          107,
+          13,
+          4,
+          40,
+          35,
+          19,
+          30
+        ],
+        [
+          0,
+          0,
+          38,
+          7,
+          14,
+          34,
+          7,
+          57,
+          16
+        ],
+        [
+          2,
+          27,
+          174,
+          17,
+          12,
+          36,
+          3,
+          9,
+          1336
+        ]
+      ],
+      "labels": [
+        "agreement",
+        "announcement",
+        "answer",
+        "appreciation",
+        "disagreement",
+        "elaboration",
+        "humor",
+        "negativereaction",
+        "question"
+      ]
+    },
+    "parent_context": {
+      "n_examples": 10343,
+      "accuracy": 0.7376003093879919,
+      "macro_f1": 0.5765719842588252,
+      "weighted_f1": 0.738700963791649,
+      "per_class_f1": {
+        "agreement": 0.6187192118226601,
+        "announcement": 0.43478260869565216,
+        "answer": 0.8378378378378378,
+        "appreciation": 0.7896440129449838,
+        "disagreement": 0.45215311004784686,
+        "elaboration": 0.6312945222304103,
+        "humor": 0.29571984435797666,
+        "negativereaction": 0.2987012987012987,
+        "question": 0.8302954116907605
+      },
+      "confusion": [
+        [
+          314,
+          1,
+          32,
+          30,
+          15,
+          102,
+          10,
+          4,
+          8
+        ],
+        [
+          0,
+          70,
+          16,
+          4,
+          1,
+          5,
+          1,
+          0,
+          37
+        ],
+        [
+          40,
+          41,
+          3596,
+          46,
+          49,
+          342,
+          84,
+          23,
+          83
+        ],
+        [
+          22,
+          4,
+          53,
+          732,
+          1,
+          69,
+          26,
+          11,
+          18
+        ],
+        [
+          12,
+          0,
+          35,
+          3,
+          189,
+          142,
+          6,
+          6,
+          16
+        ],
+        [
+          102,
+          21,
+          281,
+          75,
+          130,
+          1285,
+          38,
+          26,
+          46
+        ],
+        [
+          7,
+          7,
+          58,
+          7,
+          10,
+          48,
+          76,
+          10,
+          28
+        ],
+        [
+          1,
+          0,
+          47,
+          7,
+          20,
+          31,
+          12,
+          46,
+          9
+        ],
+        [
+          1,
+          44,
+          162,
+          14,
+          12,
+          43,
+          10,
+          9,
+          1321
+        ]
+      ],
+      "labels": [
+        "agreement",
+        "announcement",
+        "answer",
+        "appreciation",
+        "disagreement",
+        "elaboration",
+        "humor",
+        "negativereaction",
+        "question"
+      ]
+    }
+  },
+  "transitions": {
+    "all": {
+      "n_examples": 10343,
+      "helps": 1849,
+      "hurts": 868,
+      "both_correct": 5780,
+      "both_wrong": 1846,
+      "comment_only_accuracy": 0.6427535531277192,
+      "parent_context_accuracy": 0.7376003093879919
+    },
+    "available": {
+      "n_examples": 8934,
+      "helps": 1705,
+      "hurts": 743,
+      "both_correct": 4932,
+      "both_wrong": 1554,
+      "comment_only_accuracy": 0.6352137900156705,
+      "parent_context_accuracy": 0.7428923214685471
+    },
+    "empty": {
+      "n_examples": 1409,
+      "helps": 144,
+      "hurts": 125,
+      "both_correct": 848,
+      "both_wrong": 292,
+      "comment_only_accuracy": 0.6905606813342796,
+      "parent_context_accuracy": 0.7040454222853088
+    }
+  }
+}

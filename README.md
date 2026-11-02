@@ -6,11 +6,12 @@ This repository is both the team’s working project space and the final public 
 
 ## Results So Far
 
-Results through Notebook 06 (October 2026):
+Results through the transformer and parent-context follow-up (October milestone):
 
 | Component                     |                       Best result | Evaluation                                                                        |
 | ----------------------------- | --------------------------------: | --------------------------------------------------------------------------------- |
 | Discourse-act baseline        |                Macro F1 **0.373** | Class-balanced TF-IDF; development split; majority baseline 0.066                 |
+| Parent-context discourse model | Test macro F1 **0.5766** | DistilBERT with parent context versus 0.4996 comment-only; 10,343 paired test examples |
 | Reply civility baseline       | Macro F1 **0.622**; AUC **0.664** | Official CGA-CMV test split                                                       |
 | Conversation-quality baseline | Macro F1 **0.611**; AUC **0.656** | Civility/derailment; official CGA-CMV test split                                  |
 | Embedding comparison          |                BGE-small selected | Best quality/cost tradeoff; MPNet had the highest sampled derailment AUC at 0.585 |
@@ -162,13 +163,12 @@ Recommended progression:
 4. Fine-tuned DistilBERT or another compact transformer for supervised tasks.
 5. Retrieval-grounded LLM synthesis after evidence extraction and retrieval are working.
 
-Experiments: [04 — discourse baseline](notebooks/04_comment_labeling_baseline.ipynb), [05 — quality baseline](notebooks/05_conversation_quality_baseline.ipynb), and [06 — embedding comparison](notebooks/06_embedding_comparison.ipynb).
+Experiments: [04 — discourse baseline](notebooks/04_comment_labeling_baseline.ipynb), [05 — quality baseline](notebooks/05_conversation_quality_baseline.ipynb), [06 — embedding comparison](notebooks/06_embedding_comparison.ipynb), and [transformer training](notebooks/discourse_transformer_colab.ipynb).
 
-October Task 3.5: [review of PR #21 and paired parent-context analysis](reports/parent-context-review.md). Review and comparison tooling are complete; empirical per-class deltas and paired examples are deferred to [issue #22](https://github.com/Break-Through-Tech/Market-Research-1B-discussion-intelligence-toolkit/issues/22) pending the original prediction exports.
+October Task 3.5: [implementation review](reports/parent-context-review.md) and [completed paired analysis](reports/parent-context/README.md). The original exports reproduce the reported scores; parent context corrects 1,849 test errors and introduces 868. Both models' per-class F1 and reviewed examples are included.
 
 | Future experiment              | Result  |
 | ------------------------------ | ------- |
-| Context-aware discourse model  | **TBD** |
 | Aggregate quality model        | **TBD** |
 | Topic clustering and retrieval | **TBD** |
 | Integrated insight report      | **TBD** |
@@ -179,7 +179,7 @@ Use task-specific metrics. Do not rely on generic accuracy alone.
 
 | Component                       | Primary metrics                                                                 | Status and purpose                                                                        |
 | ------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Discourse-act classifier        | Macro F1, per-class F1, confusion matrix                                        | Development baseline measured; final held-out test result **TBD**                         |
+| Discourse-act classifier        | Macro F1, per-class F1, confusion matrix                                        | Held-out transformer scores and paired context analysis verified in the [results report](reports/parent-context/README.md) |
 | Civility-based quality baseline | Accuracy, macro F1, ROC AUC, matched-pair accuracy                              | Held-out baseline measured in Notebook 05                                                 |
 | Future aggregate quality scorer | Component metrics; MAE and Spearman correlation against human aggregate ratings | Requires relevance, reasoning, constructiveness, and human-rated validation data; **TBD** |
 | Topic clustering                | Silhouette score and sampled cluster-coherence review                           | Preliminary KMeans silhouette ≈0.02 in Notebook 06; improved method **TBD**               |
@@ -221,11 +221,11 @@ The demo should run on student-accessible compute such as Google Colab.
 | November  | Integration                      | End-to-end `analyze(thread)` pipeline, retrieval, LLM synthesis, package structure |
 | December  | Polish and presentation          | Final report, reproducible demo, recorded walkthrough, documented next steps       |
 
-Status: September work and Notebooks 04–06 are complete; November and December results remain **TBD**.
+Status: September work, Notebooks 04–06, and the October parent-context evaluation are complete; November integration and December results remain **TBD**.
 
 ## Next Steps
 
-- Run final held-out discourse evaluation with context-aware features.
+- Integrate the evaluated discourse classifier into the end-to-end pipeline.
 - Build relevance, reasoning, and constructiveness components for aggregate quality.
 - Cache full-corpus BGE-small embeddings and improve clustering.
 - Measure retrieval Recall@k on a small benchmark.

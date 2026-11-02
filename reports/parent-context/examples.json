@@ -1,0 +1,84 @@
+{
+  "split": "test",
+  "selection": "Six manually selected, short examples across different gold classes; illustrative rather than representative or causal.",
+  "examples": [
+    {
+      "id": "reddit:reddit-coarse-discourse-corpus:utterance:t1_c0o2iu2",
+      "conversation_id": "reddit:reddit-coarse-discourse-corpus:conversation:t3_bqf0l",
+      "text": "A good HD camera could output 30fps but shoot with 1/4 second exposures. Regular video looks funny, but a nice stationary sky might look pretty good.",
+      "parent_text": "Might not work very so well considering the low light.",
+      "gold": "elaboration",
+      "comment_only": "answer",
+      "parent_context": "elaboration",
+      "effect": "helps",
+      "has_parent_text": true,
+      "source_url": "https://www.reddit.com/comments/bqf0l/_/c0o2iu2/",
+      "review_note": "The reply develops the parent’s point about low light. The context model matches the gold elaboration label, while the comment-only model treats it as an answer."
+    },
+    {
+      "id": "reddit:reddit-coarse-discourse-corpus:utterance:t1_cqfrm9j",
+      "conversation_id": "reddit:reddit-coarse-discourse-corpus:conversation:t3_32xel2",
+      "text": "Nah, he's falling back to earth",
+      "parent_text": "I think he's an anomaly.",
+      "gold": "disagreement",
+      "comment_only": "answer",
+      "parent_context": "disagreement",
+      "effect": "helps",
+      "has_parent_text": true,
+      "source_url": "https://www.reddit.com/comments/32xel2/_/cqfrm9j/",
+      "review_note": "The reply rejects the parent’s claim. The context model matches disagreement rather than treating the reply as an answer."
+    },
+    {
+      "id": "reddit:reddit-coarse-discourse-corpus:utterance:t1_c7uplys",
+      "conversation_id": "reddit:reddit-coarse-discourse-corpus:conversation:t3_16cc39",
+      "text": "MY DAD CAN BEAT UP HIS DAD WHO CAN BEAT UP YOUR DAD SO BY THE TRANSITIVE PROPERTY MY DAD CAN BEAT UP YOURS!",
+      "parent_text": "MY DAD CAN BEAT UP YOUR DAD.",
+      "gold": "humor",
+      "comment_only": "answer",
+      "parent_context": "humor",
+      "effect": "helps",
+      "has_parent_text": true,
+      "source_url": "https://www.reddit.com/comments/16cc39/_/c7uplys/",
+      "review_note": "The exaggerated reply continues the parent’s joke. The context model matches humor rather than an ordinary answer."
+    },
+    {
+      "id": "reddit:reddit-coarse-discourse-corpus:utterance:t1_chhq4fp",
+      "conversation_id": "reddit:reddit-coarse-discourse-corpus:conversation:t3_25ie0d",
+      "text": "It all makes sense.",
+      "parent_text": "Yer a wizard, 'Arry!",
+      "gold": "agreement",
+      "comment_only": "agreement",
+      "parent_context": "humor",
+      "effect": "hurts",
+      "has_parent_text": true,
+      "source_url": "https://www.reddit.com/comments/25ie0d/_/chhq4fp/",
+      "review_note": "A joking parent is followed by a reply labeled agreement. The context model predicts humor. This illustrates overlap between tone and the reply’s discourse role."
+    },
+    {
+      "id": "reddit:reddit-coarse-discourse-corpus:utterance:t1_c4dua8u",
+      "conversation_id": "reddit:reddit-coarse-discourse-corpus:conversation:t3_sgi18",
+      "text": "I don't like them, but for a band to make it big time, they must have at least some musical talent, right?",
+      "parent_text": "you're joking, right? nickelback doesn't have talent\n\n(sorry, someone was going to bash nickelback anyways, I may has well)",
+      "gold": "question",
+      "comment_only": "question",
+      "parent_context": "disagreement",
+      "effect": "hurts",
+      "has_parent_text": true,
+      "source_url": "https://www.reddit.com/comments/sgi18/_/c4dua8u/",
+      "review_note": "The reply is phrased as a question while challenging the parent’s claim. The context model predicts disagreement instead of the gold question label, illustrating overlapping discourse functions."
+    },
+    {
+      "id": "reddit:reddit-coarse-discourse-corpus:utterance:t1_d2f7sb8",
+      "conversation_id": "reddit:reddit-coarse-discourse-corpus:conversation:t3_4g4hxw",
+      "text": "That's a stupid solution for PC, since you have screenshot button on steam which is F12 (by default). With your way you can take only one screenshot instead of few.",
+      "parent_text": "On pc... ctrl + prnt scn, ctrl + v (paste)in paint.. Ps4 has a share button, xb1 has a share option as well.",
+      "gold": "disagreement",
+      "comment_only": "disagreement",
+      "parent_context": "negativereaction",
+      "effect": "hurts",
+      "has_parent_text": true,
+      "source_url": "https://www.reddit.com/comments/4g4hxw/_/d2f7sb8/",
+      "review_note": "The reply criticizes the proposed screenshot method and offers an alternative. The context model predicts negative reaction instead of disagreement; negative tone and a counterargument can occur together."
+    }
+  ]
+}
