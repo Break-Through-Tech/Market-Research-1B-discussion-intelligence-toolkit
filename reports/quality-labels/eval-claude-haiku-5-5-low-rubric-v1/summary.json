@@ -1,0 +1,46 @@
+{
+  "model": "claude-haiku-5-5",
+  "effort": "low",
+  "backend": "claude-code",
+  "n_labels": 60,
+  "status_counts": {
+    "ok": 60
+  },
+  "usage_totals": {
+    "list_price_usd": 0.0348295999999995
+  },
+  "agreement": [
+    {
+      "dimension": "civility",
+      "n": 60,
+      "n_unscored": 0,
+      "exact": 0.9333333333333333,
+      "kappa": 0.8682766190998903,
+      "within_one": 1.0
+    },
+    {
+      "dimension": "relevance",
+      "n": 60,
+      "n_unscored": 0,
+      "exact": 0.9833333333333333,
+      "kappa": 0.8484848484848485,
+      "within_one": 1.0
+    },
+    {
+      "dimension": "reasoning",
+      "n": 60,
+      "n_unscored": 0,
+      "exact": 0.5833333333333334,
+      "kappa": 0.4113029827315542,
+      "within_one": 0.9795918367346939
+    },
+    {
+      "dimension": "constructiveness",
+      "n": 60,
+      "n_unscored": 0,
+      "exact": 0.7833333333333333,
+      "kappa": 0.6282173498570067,
+      "within_one": 0.9666666666666667
+    }
+  ]
+}

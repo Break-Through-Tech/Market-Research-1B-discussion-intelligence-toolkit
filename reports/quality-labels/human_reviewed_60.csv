@@ -1,0 +1,61 @@
+n,utterance_id,conversation_id,sample_group,derailed,civility,relevance,reasoning,constructiveness,note
+1,e8dyugn,e8dx0zm,civil,False,2,2,2,2,Careful argument separating 'caring more' from 'moral worth'.
+2,d90hs0t,d90fw81,civil,False,2,2,1,1,Answers the thread directly; support is thin (WikiLeaks 'perfect record').
+3,e5eueco,e5e2fgg,derailed_final,True,2,2,1,2,Applies the parent's own definition to expose a problem.
+4,d3hmmqq,d3h6nm1,derailed_earlier,True,2,2,1,1,Sweeping claim with one historical example.
+5,cysbk7r,cys8hqq,civil,False,2,2,N/A,2,Challenging question that pushes the other user to be specific.
+6,cvq5tj1,cvq21yg,civil,False,2,2,2,2,Firm ('you are going off topic') but respectful; clear Islam vs. Muslims distinction.
+7,dchwgc7,dch84rl,derailed_final,True,0,2,1,1,BORDERLINE: implies the other user is a bigot. I treated that as a personal attack.
+8,dvqtrqo,dvqtlrl,derailed_earlier,True,1,2,1,1,'Push your agenda' is a dismissive jab at the other user.
+9,e7akt52,e7ad2ol,derailed_final,True,1,2,1,1,"Condescending ('in your case', 'seriously?'); pool analogy mocks the person's stance."
+10,dhzhsrf,dhzfqhr,civil,False,2,2,N/A,2,Concession and thanks: counts as constructive.
+11,ddnqepp,ddndmyo,civil,False,2,2,1,1,Counterpoint backed only by personal experience.
+12,dv8o65b,dv7lh2r,civil,False,2,2,1,2,Introduces a new idea (mutualism) with a link.
+13,cz27kip,cz21my8,derailed_final,True,0,2,1,0,'Doing a lot of bitching' plus 'your ancestors didn't help build America': personal and ethnic attack.
+14,cxu8wtg,cxu8k58,civil,False,2,2,1,2,"Several reasons, but the key statistic is unsupported."
+15,e7vy2kb,e7vwgvf,civil,False,2,2,2,2,Strong disagreement handled civilly; murder analogy tests the logic.
+16,dmxp6ti,dmx897s,civil,False,2,2,1,2,Many probing questions; gives own definition.
+17,drygfkh,dryc01w,derailed_final,True,1,2,1,1,Calls the accusation 'profoundly ignorant' twice; refuses to discuss part of it.
+18,dcstgyh,dcspch2,derailed_final,True,1,1,N/A,0,Dismissive sign-off ('carry on. Reported'); mostly about a typo.
+19,e7iyx71,e7ixz7g,civil,False,1,2,0,1,Calls the other user's argument absurd; no support.
+20,dwcps2m,dwc8bai,derailed_earlier,True,1,2,1,1,EDGE CASE: calls a public figure a 'nitwit' and mocks OP. Rubric has no rule for insults at people outside the conversation.
+21,d4jd9u1,d4jclyr,civil,False,1,2,0,1,Calls a group's position 'ridiculous' (dismissive); unsupported.
+22,dqqbg9r,dqq2qgw,civil,False,2,2,N/A,2,Proposes a shared definition to find common ground.
+23,dbq2wod,dbowx4u,derailed_final,True,1,2,1,1,"Link as evidence, but 'sit in your own echo chamber' is condescending."
+24,dla4ani,dla2uy3,civil,False,2,2,2,2,Answers with direct quotes as evidence.
+25,dt68noa,dt5yu2n,derailed_final,True,1,2,2,2,BORDERLINE: 'you've picked a real doozy' is mild sarcasm; otherwise a strong argument.
+26,e75z4tm,e74qn6b,derailed_final,True,1,2,2,2,"Sarcasm ('Great, that doesn't help anyone') aimed at the answer being defended; offers a concrete alternative."
+27,dgx2wjt,dgpnal7,derailed_final,True,2,2,1,2,Answers personal questions openly and explains how their view changed.
+28,dhmmtal,dhmjvmg,civil,False,2,2,2,2,Quotes the original post as evidence.
+29,d7qcvmn,d7qahyk,civil,False,2,2,0,1,Odd but not hostile; asks a question back.
+30,d1xs144,d1xrgda,derailed_earlier,True,1,2,1,2,"EDGE CASE: 'you could even be a vengeful/salty bitch' is a generic 'you', not aimed at the other user. Practical examples."
+31,dtkhghz,dtjuta2,derailed_earlier,True,2,2,1,1,Blunt 'Wrong' plus one reason.
+32,dsqmvdb,dsqjpfb,derailed_final,True,0,2,0,0,Sarcastically says the other user holds racist views: personal attack.
+33,dp697nd,dp609id,derailed_final,True,1,1,N/A,0,"Refuses to engage until the other side concedes; about the exchange, not the topic."
+34,czbhfro,czbg2pc,civil,False,1,2,0,1,"EDGE CASE: insults a third party ('leader of assholes'), echoing the thread's wording."
+35,e548pj0,e545qya,civil,False,1,2,1,1,Sarcastic rhetorical question; implies the vitamin C source is organ meat.
+36,dd0qshk,dd0q7iq,civil,False,2,2,N/A,2,Short question that challenges the argument.
+37,du6llxh,du6k6dp,civil,False,2,2,1,2,Hyperbole about third parties; adds a new idea.
+38,e8dj9l8,e8badzl,derailed_earlier,True,1,2,1,2,"Sarcastic 'Wow!', but backs the point with a definition."
+39,d0a76oq,d0a2nzu,civil,False,2,2,1,2,"Several reasons, all unsourced ('well known')."
+40,db0sqxz,db0pcza,derailed_earlier,True,1,2,2,2,"Concedes part, quotes specifics, then questions the user's motives ('or just emoting?')."
+41,cyx1js3,cyvs09g,derailed_final,True,2,2,N/A,1,Clarifying question after an implied accusation.
+42,e0ph2mv,e0p7yel,derailed_final,True,2,2,N/A,0,Polite but ends the discussion (rubric: shuts it down = 0).
+43,cw6pw69,cw6i0zx,derailed_earlier,True,2,2,N/A,1,Simple rhetorical question.
+44,cv7wczd,cv7vfxu,civil,False,2,2,2,2,Analogy (words for blue) with a link.
+45,dwc586d,dwc31we,civil,False,2,2,2,2,Clarifies their point with comparison and a test question.
+46,dmavjmc,dmauy1m,civil,False,2,2,2,2,Gives a definition and concrete examples.
+47,dsbbpj5,dsbbkd0,civil,False,2,2,N/A,2,Clarifying question that tests the other user's definition.
+48,dt1s12j,dt1r0tr,civil,False,2,2,1,2,"Agrees, then adds new points."
+49,e46y39r,e45wwz0,derailed_final,True,1,2,1,1,"'That's just insipid' attacks the comment, not the person."
+50,czfkp9k,czffgae,derailed_earlier,True,2,2,0,1,Bare assertion that the comparison doesn't apply.
+51,dv36kvn,dv36h8w,derailed_earlier,True,2,2,N/A,0,Expresses confusion; adds nothing.
+52,donmffm,dom1z9b,derailed_final,True,2,2,2,2,Concrete example (boxing) that answers the hypothetical.
+53,dcb11kj,dcahb81,derailed_final,True,1,1,1,1,Condescending caps; replies to 'Thank you' with a different topic.
+54,e7z5tme,e7ywqkd,derailed_final,True,2,2,1,2,Apologizes for a misunderstanding; adds context.
+55,dr9zbk9,dr9vkoi,civil,False,2,2,2,2,Clear logical distinction.
+56,d15qrg5,d15mw8k,derailed_final,True,1,2,1,1,Smug ending ('you're starting to see...').
+57,e0i15wn,e0hnubd,civil,False,2,2,1,2,Gives a concrete cost figure (unsourced).
+58,d3eyby0,d3evrqd,civil,False,2,2,2,2,Quotes the WHO with a link.
+59,e0ou06j,e0or8l5,civil,False,2,2,2,2,Argument plus a linked example.
+60,dsv7sbj,dsv2i4o,derailed_final,True,1,2,0,1,Lectures the user about their attitude; unsupported.

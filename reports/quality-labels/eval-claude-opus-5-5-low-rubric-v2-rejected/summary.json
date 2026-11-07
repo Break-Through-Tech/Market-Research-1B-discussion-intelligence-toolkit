@@ -1,0 +1,46 @@
+{
+  "model": "claude-opus-5-5",
+  "effort": "low",
+  "backend": "claude-code",
+  "n_labels": 60,
+  "status_counts": {
+    "ok": 60
+  },
+  "usage_totals": {
+    "list_price_usd": 0.957696
+  },
+  "agreement": [
+    {
+      "dimension": "civility",
+      "n": 60,
+      "n_unscored": 0,
+      "exact": 0.9333333333333333,
+      "kappa": 0.8682766190998903,
+      "within_one": 1.0
+    },
+    {
+      "dimension": "relevance",
+      "n": 60,
+      "n_unscored": 0,
+      "exact": 0.9333333333333333,
+      "kappa": 0.5698924731182796,
+      "within_one": 1.0
+    },
+    {
+      "dimension": "reasoning",
+      "n": 60,
+      "n_unscored": 0,
+      "exact": 0.6666666666666666,
+      "kappa": 0.53198127925117,
+      "within_one": 1.0
+    },
+    {
+      "dimension": "constructiveness",
+      "n": 60,
+      "n_unscored": 0,
+      "exact": 0.8,
+      "kappa": 0.6417910447761195,
+      "within_one": 1.0
+    }
+  ]
+}
