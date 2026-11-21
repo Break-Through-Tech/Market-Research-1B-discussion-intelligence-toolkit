@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-21",
+  "llm_labels": "data/local/quality_labels/llm_labels-claude-opus-5-5.csv",
+  "n_train": 1251,
+  "n_train_conversations": 233,
+  "n_test_human": 60,
+  "alpha": 1.0,
+  "cv_mae_by_alpha": {
+    "1.0": 0.34577487737534146,
+    "3.0": 0.3493408559900413,
+    "10.0": 0.35466117254404944
+  },
+  "model_path": "data/local/quality_scorer.joblib",
+  "scorer_vs_human": [
+    {
+      "dimension": "civility",
+      "n": 60,
+      "mae": 0.47222943322350297,
+      "mae_rounded": 0.4166666666666667,
+      "spearman": 0.3331533458703166,
+      "mae_predict_mean": 0.5344444444444445,
+      "na_accuracy": NaN
+    },
+    {
+      "dimension": "relevance",
+      "n": 60,
+      "mae": 0.10379698972808361,
+      "mae_rounded": 0.05,
+      "spearman": 0.29829334134217755,
+      "mae_predict_mean": 0.09500000000000001,
+      "na_accuracy": NaN
+    },
+    {
+      "dimension": "reasoning",
+      "n": 49,
+      "mae": 0.4591720690181247,
+      "mae_rounded": 0.3877551020408163,
+      "spearman": 0.5000450679449226,
+      "mae_predict_mean": 0.51228654727197,
+      "na_accuracy": 0.8
+    },
+    {
+      "dimension": "constructiveness",
+      "n": 60,
+      "mae": 0.4771715733344303,
+      "mae_rounded": 0.45,
+      "spearman": 0.4745816197288688,
+      "mae_predict_mean": 0.6044444444444446,
+      "na_accuracy": NaN
+    }
+  ],
+  "scorer_cv_vs_llm": [
+    {
+      "dimension": "civility",
+      "n": 1251,
+      "mae": 0.46111659610056016,
+      "mae_rounded": 0.36850519584332536,
+      "spearman": 0.36175481058217107,
+      "mae_predict_mean": 0.531246944890131,
+      "na_accuracy": NaN
+    },
+    {
+      "dimension": "relevance",
+      "n": 1251,
+      "mae": 0.10734025378335607,
+      "mae_rounded": 0.058353317346123104,
+      "spearman": 0.2364944583189694,
+      "mae_predict_mean": 0.1084829977744424,
+      "na_accuracy": NaN
+    },
+    {
+      "dimension": "reasoning",
+      "n": 1193,
+      "mae": 0.3983812749886644,
+      "mae_rounded": 0.3352891869237217,
+      "spearman": 0.6935376805845368,
+      "mae_predict_mean": 0.5206819045718634,
+      "na_accuracy": 0.9072741806554756
+    },
+    {
+      "dimension": "constructiveness",
+      "n": 1251,
+      "mae": 0.41626138462878526,
+      "mae_rounded": 0.3413269384492406,
+      "spearman": 0.5724283731787431,
+      "mae_predict_mean": 0.5849248658627055,
+      "na_accuracy": NaN
+    }
+  ],
+  "llm_vs_human": [
+    {
+      "dimension": "civility",
+      "n": 60,
+      "mae": 0.06666666666666667,
+      "mae_rounded": 0.06666666666666667,
+      "spearman": 0.9010109489032668,
+      "mae_predict_mean": 0.5344444444444445,
+      "na_accuracy": NaN
+    },
+    {
+      "dimension": "relevance",
+      "n": 60,
+      "mae": 0.08333333333333333,
+      "mae_rounded": 0.08333333333333333,
+      "spearman": 0.5848976518656017,
+      "mae_predict_mean": 0.09500000000000001,
+      "na_accuracy": NaN
+    },
+    {
+      "dimension": "reasoning",
+      "n": 49,
+      "mae": 0.20408163265306123,
+      "mae_rounded": 0.20408163265306123,
+      "spearman": 0.7237055754873681,
+      "mae_predict_mean": 0.51228654727197,
+      "na_accuracy": 0.9
+    },
+    {
+      "dimension": "constructiveness",
+      "n": 60,
+      "mae": 0.15,
+      "mae_rounded": 0.15,
+      "spearman": 0.8087024616900403,
+      "mae_predict_mean": 0.6044444444444446,
+      "na_accuracy": NaN
+    }
+  ]
+}
