@@ -7,6 +7,9 @@ how well the LLM agrees with the reference labels.
 **Results so far:** Claude Opus 5.5 matches the reference labels on
 civility 93% of the time (Cohen's kappa 0.87) and is never more than one point
 off on any dimension. Reasoning is the weakest dimension (73%, kappa 0.61).
+A first lightweight scorer trained on the LLM labels (section 7) runs in
+seconds but is only modestly better than guessing the average. Relevance has
+almost no variation and is recommended for dropping.
 
 ## 1. The rubric
 
@@ -134,9 +137,23 @@ lower).
 
 ## 6. Labeling run
 
-_Pending: the run on 1,000 sampled conversations is in progress. This section
-will report how many replies were scored, how many failed, the score
-distribution, and civility by civil/derailed at scale._
+**Status (2026-11-21): partial.** The run uses the Claude Code plan's usage
+limit, which stopped it twice. So far **1,582 of 5,134 replies** (311
+conversations) are labeled with no outstanding failures. It's resumable, so
+re-running the command below continues it. Numbers below are from the partial
+set and will change slightly when the run finishes.
+
+| Dimension | 0 | 1 | 2 | N/A |
+|---|---|---|---|---|
+| Civility | 4% | 37% | 59% | |
+| Relevance | 0% | 6% | 94% | |
+| Reasoning | 18% | 49% | 28% | 5% |
+| Constructiveness | 8% | 36% | 56% | |
+
+**Sanity check at scale:** replies in derailed conversations average civility
+1.47 (n = 851) vs. 1.65 in civil ones (n = 731), and score 0 more than twice
+as often (5.4% vs. 2.2%). That's the expected direction, and matches the
+reference-set check in section 2.
 
 - **Sample:** 1,000 whole conversations (5,134 replies), drawn as matched
   civil/derailed pairs from all three splits, excluding the 60 reference
@@ -145,8 +162,77 @@ distribution, and civility by civil/derailed at scale._
 - **Output:** `data/local/quality_labels/llm_labels-claude-opus-5-5.csv`
   (gitignored; holds IDs, split, derailed flag, scores and rationale).
 
-## 7. Limitations and next steps
+## 7. Lightweight scorer (first version)
 
+The LLM is too slow and usage-hungry to score every comment the pipeline sees,
+so a cheap model is trained on the LLM labels and called from the pipeline.
+
+- **Code:** `artifacts/quality_scorer.py` (`QualityScorer`, `score_comments`),
+  trained by `scripts/train_quality_scorer.py`, tested in
+  `tests/test_quality_scorer.py`.
+- **Model:** per dimension, ridge regression on TF-IDF word 1–2 grams of the
+  reply plus five simple features (length, question marks, second-person
+  words, TF-IDF similarity to parent and to thread start). Outputs a 0–2 float
+  per dimension, `reasoning_na_prob` for "no claim", and `overall_score` (mean
+  of civility, reasoning, constructiveness; relevance left out, see below).
+- **Training data:** the 1,251 Opus labels available on 2026-11-21 (233
+  conversations). Ridge strength chosen by 5-fold cross-validation on the LLM
+  labels, grouped by CGA-CMV pair. The 60 reference replies were **not** used
+  for training or tuning.
+- **Saved model:** `data/local/quality_scorer.joblib` (gitignored; retrain
+  with the script).
+
+**Results on the 60 reference replies** (MAE = mean absolute error on the 0–2
+scale, lower is better; "predict mean" = MAE of always guessing the average,
+for scale; reasoning excludes the 11 N/A references):
+
+| Dimension | Scorer MAE | Scorer Spearman | Predict-mean MAE | Opus MAE | Opus Spearman |
+|---|---|---|---|---|---|
+| Civility | 0.47 | 0.33 | 0.53 | 0.07 | 0.90 |
+| Relevance | 0.10 | 0.30 | 0.10 | 0.08 | 0.58 |
+| Reasoning | 0.46 | 0.50 | 0.51 | 0.20 | 0.72 |
+| Constructiveness | 0.48 | 0.47 | 0.60 | 0.15 | 0.81 |
+
+Reasoning N/A was called correctly for 80% of replies (Opus: 90%).
+Cross-validated against the LLM labels the numbers are similar (civility MAE
+0.46 / Spearman 0.36; reasoning 0.40 / 0.69; constructiveness 0.42 / 0.57), so
+the scorer is not overfitting the reference set. It just hasn't learned much yet.
+
+**Error analysis** (`reports/quality-labels/scorer/scorer_errors.csv`; 22 of
+60 replies are off by at least 0.75 on some dimension):
+
+- **Pulled toward the middle.** Scores cluster around 1.2–1.9. Clear personal
+  attacks (reference civility 0) get about 1.2–1.3, and some plainly civil
+  replies get about 1.2. Ridge regression on about 1,250 examples, most of them
+  civil, does this.
+- **Civility needs meaning, not words.** The missed attacks are implied ("implies
+  the other user is a bigot"), not profanity. Word counts can't see them.
+- **Short concessions and questions** ("thanks, fair point", probing questions)
+  are under-scored on constructiveness. They're short, and short replies are
+  usually low-effort in the training data.
+
+**Tried and not kept:** sentence embeddings (all-MiniLM-L6-v2,
+all-mpnet-base-v2) in place of TF-IDF. Cross-validated MAE was within about
+0.03 of TF-IDF on every dimension, so they don't justify a 100–400 MB model
+download in the pipeline.
+
+**Relevance should be dropped or merged.** 94% of LLM labels and 57 of 60
+reference labels are 2. Neither the LLM (kappa 0.51) nor the scorer (no better
+than predicting the mean) separates the rare 1s reliably. That's too little
+variation to be a useful score on CGA-CMV. The scorer still outputs it, but
+`overall_score` leaves it out.
+
+**Next:** retrain once the labeling run finishes (about 4× the data). If
+civility is still weak, combine with the baseline civility model from Task 6
+(trained on moderator removals) or fine-tune a small transformer.
+
+## 8. Limitations and next steps
+
+- **The 60 aren't a perfectly clean held-out set.** They were used to compare
+  rubric v1 against v2 (section 4), and Claude Opus drafted them before human
+  review. A freshly hand-labeled batch would give a cleaner agreement number.
+- **Data-sharing permission still to confirm.** The issue asks to confirm we
+  may send Reddit text to an external LLM; this has not been recorded yet.
 - **60 replies is small.** One reply is about 1.7 percentage points of exact
   agreement.
 - **Only CGA-CMV.** All replies are from r/changemyview arguments. Other

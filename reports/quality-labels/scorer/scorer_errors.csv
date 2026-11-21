@@ -1,0 +1,23 @@
+utterance_id,sample_group,civility,civility_score,civility_error,relevance,relevance_score,relevance_error,reasoning,reasoning_score,reasoning_error,constructiveness,constructiveness_score,constructiveness_error,note
+e5eueco,derailed_final,2,1.657,0.343,2,1.926,0.074,1,0.499,0.501,2,1.14,0.86,Applies the parent's own definition to expose a problem.
+cysbk7r,civil,2,1.836,0.164,2,1.955,0.045,N/A,0.762,,2,1.245,0.755,Challenging question that pushes the other user to be specific.
+cvq5tj1,civil,2,1.247,0.753,2,1.773,0.227,2,1.461,0.539,2,1.489,0.511,Firm ('you are going off topic') but respectful; clear Islam vs. Muslims distinction.
+dchwgc7,derailed_final,0,1.33,1.33,2,1.845,0.155,1,0.801,0.199,1,1.107,0.107,BORDERLINE: implies the other user is a bigot. I treated that as a personal attack.
+dhzhsrf,civil,2,1.353,0.647,2,1.761,0.239,N/A,0.692,,2,0.963,1.037,Concession and thanks: counts as constructive.
+cz27kip,derailed_final,0,1.158,1.158,2,1.933,0.067,1,1.06,0.06,0,1.341,1.341,'Doing a lot of bitching' plus 'your ancestors didn't help build America': personal and ethnic attack.
+dmxp6ti,civil,2,1.244,0.756,2,1.95,0.05,1,1.076,0.076,2,1.724,0.276,Many probing questions; gives own definition.
+dcstgyh,derailed_final,1,1.737,0.737,1,1.894,0.894,N/A,0.834,,0,1.486,1.486,Dismissive sign-off ('carry on. Reported'); mostly about a typo.
+d4jd9u1,civil,1,1.986,0.986,2,1.993,0.007,0,0.925,0.925,1,1.585,0.585,Calls a group's position 'ridiculous' (dismissive); unsupported.
+dgx2wjt,derailed_final,2,1.206,0.794,2,1.933,0.067,1,1.285,0.285,2,1.522,0.478,Answers personal questions openly and explains how their view changed.
+dhmmtal,civil,2,1.477,0.523,2,1.925,0.075,2,0.876,1.124,2,1.452,0.548,Quotes the original post as evidence.
+dsqmvdb,derailed_final,0,1.26,1.26,2,1.907,0.093,0,0.309,0.309,0,0.818,0.818,Sarcastically says the other user holds racist views: personal attack.
+czbhfro,civil,1,1.785,0.785,2,1.904,0.096,0,0.265,0.265,1,0.961,0.039,"EDGE CASE: insults a third party ('leader of assholes'), echoing the thread's wording."
+db0sqxz,derailed_earlier,1,1.496,0.496,2,1.921,0.079,2,1.146,0.854,2,1.572,0.428,"Concedes part, quotes specifics, then questions the user's motives ('or just emoting?')."
+e0ph2mv,derailed_final,2,1.332,0.668,2,1.796,0.204,N/A,0.841,,0,1.039,1.039,Polite but ends the discussion (rubric: shuts it down = 0).
+dmavjmc,civil,2,1.627,0.373,2,1.996,0.004,2,0.851,1.149,2,1.433,0.567,Gives a definition and concrete examples.
+dsbbpj5,civil,2,1.43,0.57,2,1.941,0.059,N/A,0.562,,2,1.204,0.796,Clarifying question that tests the other user's definition.
+dv36kvn,derailed_earlier,2,1.716,0.284,2,1.911,0.089,N/A,0.246,,0,0.819,0.819,Expresses confusion; adds nothing.
+donmffm,derailed_final,2,1.62,0.38,2,1.847,0.153,2,0.648,1.352,2,1.319,0.681,Concrete example (boxing) that answers the hypothetical.
+dcb11kj,derailed_final,1,1.132,0.132,1,1.856,0.856,1,0.809,0.191,1,1.301,0.301,Condescending caps; replies to 'Thank you' with a different topic.
+dr9zbk9,civil,2,1.327,0.673,2,1.888,0.112,2,0.677,1.323,2,1.205,0.795,Clear logical distinction.
+dsv7sbj,derailed_final,1,1.454,0.454,2,1.9,0.1,0,0.778,0.778,1,1.121,0.121,Lectures the user about their attitude; unsupported.

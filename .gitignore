@@ -25,3 +25,6 @@ __pycache__/
 
 # Full local datasets and generated handoff bundles
 /data/local/
+
+# Office lock files
+~$*
